@@ -111,8 +111,10 @@
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Services\AlertService.cs" />
     <Compile Include="Services\CurrentUserService.cs" />
     <Compile Include="Services\DatabaseService.cs" />
+    <Compile Include="Services\ExceptionHandler.cs" />
     <Compile Include="Services\TimeZoneService.cs" />
     <Compile Include="Validators\AppointmentValidator.cs" />
     <Page Include="Views\MainWindow.xaml">

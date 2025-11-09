@@ -44,7 +44,7 @@ namespace AppointmentScheduler.Repositories
             }
             catch(MySqlException ex)
             {
-                throw new ApplicationException(ExceptionHandler.GetMessage(ex, "Get countries"), ex);
+                throw new ApplicationException(Services.ExceptionHandler.GetMessage(ex, "Get countries"), ex);
             }   
         }
 
@@ -77,7 +77,7 @@ namespace AppointmentScheduler.Repositories
             }
             catch(MySqlException ex)
             {
-                throw new ApplicationException(ExceptionHandler.GetMessage(ex, "Add country"), ex);
+                throw new ApplicationException(Services.ExceptionHandler.GetMessage(ex, "Add country"), ex);
             }
         }
 
@@ -116,7 +116,7 @@ namespace AppointmentScheduler.Repositories
             }
             catch (MySqlException ex)
             {
-                throw new ApplicationException(ExceptionHandler.GetMessage(ex, "Look up country by name"), ex);
+                throw new ApplicationException(Services.ExceptionHandler.GetMessage(ex, "Look up country by name"), ex);
             }
         }
 
@@ -131,10 +131,8 @@ namespace AppointmentScheduler.Repositories
             }
             else
             {
-                Country newCountry = new Country
-                {
-                    CountryName = normalizedName
-                };
+                Country newCountry = new Country();
+                newCountry.CountryName = normalizedName;
 
                 int newId = AddCountry(newCountry);
                 return newId;

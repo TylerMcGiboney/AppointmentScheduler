@@ -8,14 +8,14 @@ namespace AppointmentScheduler.Models
 {
     public class Customer
     {
-        int CustomerId { get; set; }
-        string CustomerName { get; set; }
-        int AddressId { get; set; }
-        bool IsActive { get; set; }
-        DateTime CreateDate { get; set; }
-        string CreatedBy { get; set; }
-        DateTime LastUpdate { get; set; }
-        string LastUpdateBy { get; set; }
+        public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public int AddressId { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreateDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime LastUpdate { get; set; }
+        public string LastUpdateBy { get; set; }
 
     }
 }

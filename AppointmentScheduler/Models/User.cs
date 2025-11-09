@@ -8,14 +8,14 @@ namespace AppointmentScheduler.Models
 {
     public class User
     {
-        int Id { get; set; }
-        string UserName { get; set; }
-        string Password { get; set; }
-        bool IsActive { get; set; }
-        DateTime CreateDate { get; set; }
-        string CreatedBy { get; set; }
-        DateTime LastUpdate { get; set; }
-        string LastUpdateBy { get; set; }
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreateDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime LastUpdate { get; set; }
+        public string LastUpdateBy { get; set; }
 
     }
 }

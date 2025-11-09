@@ -8,13 +8,13 @@ namespace AppointmentScheduler.Models
 {
     public class City
     {
-        int CityId { get; set; }
-        string CityName { get; set; }
-        int CountryId { get; set; }
-        DateTime CreateDate { get; set; }
-        string CreatedBy { get; set; }
-        DateTime LastUpdate { get; set; }
-        string LastUpdateBy { get; set; }
+        public int CityId { get; set; }
+        public string CityName { get; set; }
+        public int CountryId { get; set; }
+        public DateTime CreateDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime LastUpdate { get; set; }
+        public string LastUpdateBy { get; set; }
 
     }
 }

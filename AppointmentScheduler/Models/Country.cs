@@ -8,11 +8,11 @@ namespace AppointmentScheduler.Models
 {
     public class Country
     {
-        int CountryId { get; set; }
-        string CountryName { get; set; }
-        DateTime CreateDate { get; set; }
-        string CreatedBy { get; set; }
-        DateTime LastUpdate { get; set; }
-        string LastUpdateBy { get; set; }
+        public int CountryId { get; set; }
+        public string CountryName { get; set; }
+        public DateTime CreateDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime LastUpdate { get; set; }
+        public string LastUpdateBy { get; set; }
     }
 }
