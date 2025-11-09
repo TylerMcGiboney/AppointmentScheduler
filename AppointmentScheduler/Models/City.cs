@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace AppointmentScheduler.Models
 {
-    class City
+    public class City
     {
+        int CityId { get; set; }
+        string CityName { get; set; }
+        int CountryId { get; set; }
+        DateTime CreateDate { get; set; }
+        string CreatedBy { get; set; }
+        DateTime LastUpdate { get; set; }
+        string LastUpdateBy { get; set; }
+
     }
 }
