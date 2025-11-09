@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace AppointmentScheduler.Services
 {
-    class CurrentUserService
+    public interface ICurrentUserService
     {
+        string UserName { get; }
+        void Set(string userName);
+    }
+
+    public sealed class CurrentUserService : ICurrentUserService
+    {
+        public string UserName { get; private set; } = "unknown";
+
+        public void Set(string userName)
+        {
+            UserName = userName ?? "unknown";
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppointmentScheduler.Services
 {
-    class AlertService
+    public class AlertService
     {
     }
 }
