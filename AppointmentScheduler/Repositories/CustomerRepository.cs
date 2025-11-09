@@ -83,7 +83,7 @@ namespace AppointmentScheduler.Repositories
             }
         }
 
-        public bool DeleteCustomer(Customer customer)
+        public bool DeleteCustomerById(int customerId)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace AppointmentScheduler.Repositories
                     string query = @"DELETE FROM customer WHERE customerId = @customerId";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@customerId", customer.CustomerId);
+                        cmd.Parameters.AddWithValue("@customerId", customerId);
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected == 0)
                         {
