@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace AppointmentScheduler.Models
 {
-    class Country
+    public class Country
     {
+        int CountryId { get; set; }
+        string CountryName { get; set; }
+        DateTime CreateDate { get; set; }
+        string CreatedBy { get; set; }
+        DateTime LastUpdate { get; set; }
+        string LastUpdateBy { get; set; }
     }
 }
