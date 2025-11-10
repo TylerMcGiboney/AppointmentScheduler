@@ -59,6 +59,24 @@ namespace AppointmentScheduler.Services
             return schedule;
         }
 
+        public List<CustomerAppointmentReport> AppointmentsByCustomer()
+        {
+            CustomerRepository customerRepository = new CustomerRepository();
+            List<Customer> customers = customerRepository.GetCustomers();
+            AppointmentRepository appointmentRepository = new AppointmentRepository();
+            List<Appointment> appointments = appointmentRepository.GetAppointments();
+            var reportData = customers
+                .Select(c => new CustomerAppointmentReport
+                {
+                    CustomerName = c.CustomerName,
+                    AppointmentCount = appointments.Count(a => a.CustomerId == c.CustomerId)
+                })
+                .OrderByDescending(r => r.AppointmentCount)
+                .ThenBy(r => r.CustomerName)
+                .ToList();
+            return reportData;
+        }
+
 
     }
 
@@ -77,5 +95,11 @@ namespace AppointmentScheduler.Services
         public DateTime StartLocal { get; set; }
         public DateTime EndLocal { get; set; }
         public string Type { get; set; }
+    }
+
+    public class CustomerAppointmentReport
+    {
+        public string CustomerName { get; set; }
+        public int AppointmentCount { get; set; }
     }
 }
