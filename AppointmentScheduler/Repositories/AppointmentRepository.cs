@@ -20,30 +20,32 @@ namespace AppointmentScheduler.Repositories
                 using (MySqlConnection conn = DatabaseService.GetConnection())
                 {
                     conn.Open();
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        while (reader.Read())
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            Appointment appointment = new Appointment
+                            while (reader.Read())
                             {
-                                AppointmentId = reader.GetInt32("appointmentId"),
-                                CustomerId = reader.GetInt32("customerId"),
-                                UserId = reader.GetInt32("userId"),
-                                Title = reader.GetString("title"),
-                                Description = reader.GetString("description"),
-                                Location = reader.GetString("location"),
-                                Contact = reader.GetString("contact"),
-                                Type = reader.GetString("type"),
-                                Url = reader.GetString("url"),
-                                Start = reader.GetDateTime("start"),
-                                End = reader.GetDateTime("end"),
-                                CreateDate = reader.GetDateTime("createDate"),
-                                CreatedBy = reader.GetString("createdBy"),
-                                LastUpdate = reader.GetDateTime("lastUpdate"),
-                                LastUpdateBy = reader.GetString("lastUpdateBy")
-                            };
-                            appointments.Add(appointment);
+                                Appointment appointment = new Appointment
+                                {
+                                    AppointmentId = reader.GetInt32("appointmentId"),
+                                    CustomerId = reader.GetInt32("customerId"),
+                                    UserId = reader.GetInt32("userId"),
+                                    Title = reader.GetString("title"),
+                                    Description = reader.GetString("description"),
+                                    Location = reader.GetString("location"),
+                                    Contact = reader.GetString("contact"),
+                                    Type = reader.GetString("type"),
+                                    Url = reader.GetString("url"),
+                                    Start = reader.GetDateTime("start"),
+                                    End = reader.GetDateTime("end"),
+                                    CreateDate = reader.GetDateTime("createDate"),
+                                    CreatedBy = reader.GetString("createdBy"),
+                                    LastUpdate = reader.GetDateTime("lastUpdate"),
+                                    LastUpdateBy = reader.GetString("lastUpdateBy")
+                                };
+                                appointments.Add(appointment);
+                            }
                         }
                     }
                 }
@@ -64,31 +66,33 @@ namespace AppointmentScheduler.Repositories
                 using (MySqlConnection conn = DatabaseService.GetConnection())
                 {
                     conn.Open();
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@userId", userId);
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        while (reader.Read())
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            Appointment appointment = new Appointment
+                            while (reader.Read())
                             {
-                                AppointmentId = reader.GetInt32("appointmentId"),
-                                CustomerId = reader.GetInt32("customerId"),
-                                UserId = reader.GetInt32("userId"),
-                                Title = reader.GetString("title"),
-                                Description = reader.GetString("description"),
-                                Location = reader.GetString("location"),
-                                Contact = reader.GetString("contact"),
-                                Type = reader.GetString("type"),
-                                Url = reader.GetString("url"),
-                                Start = reader.GetDateTime("start"),
-                                End = reader.GetDateTime("end"),
-                                CreateDate = reader.GetDateTime("createDate"),
-                                CreatedBy = reader.GetString("createdBy"),
-                                LastUpdate = reader.GetDateTime("lastUpdate"),
-                                LastUpdateBy = reader.GetString("lastUpdateBy")
-                            };
-                            appointments.Add(appointment);
+                                Appointment appointment = new Appointment
+                                {
+                                    AppointmentId = reader.GetInt32("appointmentId"),
+                                    CustomerId = reader.GetInt32("customerId"),
+                                    UserId = reader.GetInt32("userId"),
+                                    Title = reader.GetString("title"),
+                                    Description = reader.GetString("description"),
+                                    Location = reader.GetString("location"),
+                                    Contact = reader.GetString("contact"),
+                                    Type = reader.GetString("type"),
+                                    Url = reader.GetString("url"),
+                                    Start = reader.GetDateTime("start"),
+                                    End = reader.GetDateTime("end"),
+                                    CreateDate = reader.GetDateTime("createDate"),
+                                    CreatedBy = reader.GetString("createdBy"),
+                                    LastUpdate = reader.GetDateTime("lastUpdate"),
+                                    LastUpdateBy = reader.GetString("lastUpdateBy")
+                                };
+                                appointments.Add(appointment);
+                            }
                         }
                     }
                 }
@@ -109,31 +113,33 @@ namespace AppointmentScheduler.Repositories
                 using (MySqlConnection conn = DatabaseService.GetConnection())
                 {
                     conn.Open();
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@customerId", customerId);
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        while (reader.Read())
+                        cmd.Parameters.AddWithValue("@customerId", customerId);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            Appointment appointment = new Appointment
+                            while (reader.Read())
                             {
-                                AppointmentId = reader.GetInt32("appointmentId"),
-                                CustomerId = reader.GetInt32("customerId"),
-                                UserId = reader.GetInt32("userId"),
-                                Title = reader.GetString("title"),
-                                Description = reader.GetString("description"),
-                                Location = reader.GetString("location"),
-                                Contact = reader.GetString("contact"),
-                                Type = reader.GetString("type"),
-                                Url = reader.GetString("url"),
-                                Start = reader.GetDateTime("start"),
-                                End = reader.GetDateTime("end"),
-                                CreateDate = reader.GetDateTime("createDate"),
-                                CreatedBy = reader.GetString("createdBy"),
-                                LastUpdate = reader.GetDateTime("lastUpdate"),
-                                LastUpdateBy = reader.GetString("lastUpdateBy")
-                            };
-                            appointments.Add(appointment);
+                                Appointment appointment = new Appointment
+                                {
+                                    AppointmentId = reader.GetInt32("appointmentId"),
+                                    CustomerId = reader.GetInt32("customerId"),
+                                    UserId = reader.GetInt32("userId"),
+                                    Title = reader.GetString("title"),
+                                    Description = reader.GetString("description"),
+                                    Location = reader.GetString("location"),
+                                    Contact = reader.GetString("contact"),
+                                    Type = reader.GetString("type"),
+                                    Url = reader.GetString("url"),
+                                    Start = reader.GetDateTime("start"),
+                                    End = reader.GetDateTime("end"),
+                                    CreateDate = reader.GetDateTime("createDate"),
+                                    CreatedBy = reader.GetString("createdBy"),
+                                    LastUpdate = reader.GetDateTime("lastUpdate"),
+                                    LastUpdateBy = reader.GetString("lastUpdateBy")
+                                };
+                                appointments.Add(appointment);
+                            }
                         }
                     }
                 }
@@ -144,6 +150,60 @@ namespace AppointmentScheduler.Repositories
                 throw new ApplicationException(Services.ExceptionHandler.GetMessage(ex, "Get Appointments By Customer ID"), ex);
             }
         }
+
+        public List<Appointment> GetAppointmentsByDay(DateTime date)
+        {
+            List<Appointment> appointmentsByDay = new List<Appointment>();
+
+            try
+            {
+                string query = "SELECT * FROM appointment WHERE DATE(start) = @date";
+                using (MySqlConnection conn = DatabaseService.GetConnection())
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        // Only the date part is used in the comparison.
+                        cmd.Parameters.AddWithValue("@date", date.Date);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Appointment appointment = new Appointment
+                                {
+                                    AppointmentId = reader.GetInt32("appointmentId"),
+                                    CustomerId = reader.GetInt32("customerId"),
+                                    UserId = reader.GetInt32("userId"),
+                                    Title = reader.GetString("title"),
+                                    Description = reader.GetString("description"),
+                                    Location = reader.GetString("location"),
+                                    Contact = reader.GetString("contact"),
+                                    Type = reader.GetString("type"),
+                                    Url = reader.GetString("url"),
+                                    Start = reader.GetDateTime("start"),
+                                    End = reader.GetDateTime("end"),
+                                    CreateDate = reader.GetDateTime("createDate"),
+                                    CreatedBy = reader.GetString("createdBy"),
+                                    LastUpdate = reader.GetDateTime("lastUpdate"),
+                                    LastUpdateBy = reader.GetString("lastUpdateBy")
+                                };
+
+                                appointmentsByDay.Add(appointment);
+                            }
+                        }
+                    }
+                }
+
+                return appointmentsByDay;
+            }
+            catch (MySqlException ex)
+            {
+                throw new ApplicationException(
+                    Services.ExceptionHandler.GetMessage(ex, "Get appointments by day"),
+                    ex);
+            }
+        }
+        
 
         public int AddAppointment(Appointment appointment)
         {

@@ -187,5 +187,34 @@ namespace AppointmentScheduler.Repositories
                 throw new ApplicationException(Services.ExceptionHandler.GetMessage(ex, "Get customer by ID"), ex);
             }
         }
+
+        public string GetCustomerNameById(int id)
+        {
+            try
+            {
+                using (MySqlConnection conn = DatabaseService.GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT customerName FROM customer WHERE customerId = @customerId";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@customerId", id);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            return Convert.ToString(result);
+                        }
+                        else
+                        {
+                            throw new ApplicationException($"Customer with ID {id} not found.");
+                        }
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new ApplicationException(Services.ExceptionHandler.GetMessage(ex, "Get customer name by ID"), ex);
+            }
+        }
     }
 }

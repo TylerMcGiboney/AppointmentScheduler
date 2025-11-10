@@ -105,6 +105,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Auth\LoginAuth.cs" />
+    <Compile Include="Auth\LoginHistory.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\AppointmentRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\ExceptionHandler.cs" />
     <Compile Include="Services\LocalizationService.cs" />
+    <Compile Include="Services\ReportService.cs" />
     <Compile Include="Validators\AppointmentValidator.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
