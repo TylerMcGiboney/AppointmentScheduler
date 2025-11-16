@@ -34,7 +34,7 @@ namespace AppointmentScheduler.Auth
                             if (reader.Read())
                             {
                                 User authenticatedUser = new User();
-                                authenticatedUser.Id = reader.GetInt32("userId");
+                                authenticatedUser.UserId = reader.GetInt32("userId");
                                 authenticatedUser.UserName = reader.GetString("userName");
                                 authenticatedUser.Password = null; // Do not expose password
                                 authenticatedUser.IsActive = reader.GetBoolean("active");

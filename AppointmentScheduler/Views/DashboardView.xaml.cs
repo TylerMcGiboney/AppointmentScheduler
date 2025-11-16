@@ -12,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using AppointmentScheduler.Models;
 
-namespace AppointmentScheduler
+namespace AppointmentScheduler.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DashboardView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DashboardView : UserControl
     {
-        public MainWindow(User user)
+        public DashboardView()
         {
             InitializeComponent();
         }

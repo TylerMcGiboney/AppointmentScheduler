@@ -70,7 +70,7 @@ namespace AppointmentScheduler.Validators
 
             // Adjust this property name if your User model is different.
             List<Appointment> existingAppointments =
-                appointmentRepository.GetAppointmentsByUserId(App.CurrentUser.Id);
+                appointmentRepository.GetAppointmentsByUserId(App.CurrentUser.UserId);
 
             foreach (var appointment in existingAppointments)
             {

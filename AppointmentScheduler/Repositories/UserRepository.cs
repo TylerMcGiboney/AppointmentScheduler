@@ -37,5 +37,6 @@ namespace AppointmentScheduler.Repositories
             {
                 throw new ApplicationException(Services.ExceptionHandler.GetMessage(ex, "Get user name by user ID"), ex);
             }
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace AppointmentScheduler.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace AppointmentScheduler.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AppointmentScheduler.Resources.Strings", typeof(Strings).Assembly);
@@ -51,7 +51,7 @@ namespace AppointmentScheduler.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace AppointmentScheduler.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
-        internal static string Login_Button {
+        public static string Login_Button {
             get {
                 return ResourceManager.GetString("Login_Button", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace AppointmentScheduler.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Please enter both username and password..
         /// </summary>
-        internal static string Login_EmptyFields {
+        public static string Login_EmptyFields {
             get {
                 return ResourceManager.GetString("Login_EmptyFields", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace AppointmentScheduler.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The username and password do not match..
         /// </summary>
-        internal static string Login_InvalidCredentials {
+        public static string Login_InvalidCredentials {
             get {
                 return ResourceManager.GetString("Login_InvalidCredentials", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace AppointmentScheduler.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
-        internal static string Login_PasswordLabel {
+        public static string Login_PasswordLabel {
             get {
                 return ResourceManager.GetString("Login_PasswordLabel", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace AppointmentScheduler.Resources {
         /// <summary>
         ///   Looks up a localized string similar to User Login.
         /// </summary>
-        internal static string Login_Title {
+        public static string Login_Title {
             get {
                 return ResourceManager.GetString("Login_Title", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace AppointmentScheduler.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
-        internal static string Login_UsernameLabel {
+        public static string Login_UsernameLabel {
             get {
                 return ResourceManager.GetString("Login_UsernameLabel", resourceCulture);
             }

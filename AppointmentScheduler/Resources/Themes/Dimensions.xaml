@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Spacing -->
+    <Thickness x:Key="DefaultMargin">16</Thickness>
+    <Thickness x:Key="DefaultPadding">12</Thickness>
+    <CornerRadius x:Key="DefaultCornerRadius">4</CornerRadius>
+</ResourceDictionary>

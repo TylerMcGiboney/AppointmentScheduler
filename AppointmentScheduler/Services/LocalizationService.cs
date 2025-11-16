@@ -11,8 +11,8 @@ namespace AppointmentScheduler.Services
         public static List<string> SupportedLanguages()
         {
             List<string> supportedLanguages = new List<string>();
-            supportedLanguages.Add("en-US");
-            supportedLanguages.Add("es-ES");
+            supportedLanguages.Add("English");
+            supportedLanguages.Add("Spanish");
             return supportedLanguages;
         }
 
@@ -25,26 +25,31 @@ namespace AppointmentScheduler.Services
  
         public void ChangeLanguage(string languageCode)
         {
-            List<string> supported = SupportedLanguages();
-            if (!supported.Contains(languageCode))
-            {
-                throw new NotSupportedException(
-                    string.Format("The language code '{0}' is not supported.", languageCode));
-            }
-
-            CultureInfo culture = new CultureInfo(languageCode);
-
-            // Used for resource lookups (Strings.resx, Strings.es.resx)
+            var culture = new CultureInfo(languageCode);
             Thread.CurrentThread.CurrentUICulture = culture;
-
-            // Optional, but useful for date/number formatting
             Thread.CurrentThread.CurrentCulture = culture;
+        }
+
+        public void SetLanguageBasedOnLocation()
+        {
+            TimeZoneInfo userTimeZone = TimeZoneInfo.Local;
+
+            if (userTimeZone.Id.Contains("Mexico") || userTimeZone.Id.Contains("Central America"))
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es-ES");
+            }
+            else
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+
+            }
         }
 
       
         public string GetLocalTimeZoneDisplayName()
         {
-            return TimeZoneInfo.Local.DisplayName;
+            TimeZoneInfo userTimeZone = TimeZoneInfo.Local;
+            return userTimeZone.StandardName;
         }
 
         public DateTime ConvertUtcToLocal(DateTime utcDateTime)
