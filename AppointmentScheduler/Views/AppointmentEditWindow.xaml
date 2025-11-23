@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window x:Class="AppointmentScheduler.Views.AppointmentEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle}"
+        Height="700"
+        MinWidth="700"
+        MaxWidth="1100"
+        MinHeight="600"
+        MaxHeight="900"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize">
+
+    <!-- Outer layout with primary background color -->
+    <Grid Background="{StaticResource PrimaryColorBrush}">
+        <!-- Main card container for the edit form -->
+        <Border Style="{StaticResource CardBorderStyle}"
+                Margin="16"
+                Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Header row -->
+                    <RowDefinition Height="12"/>
+                    <!-- Spacer row -->
+                    <RowDefinition Height="*"/>
+                    <!-- Form row with ScrollViewer -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Buttons row -->
+                </Grid.RowDefinitions>
+
+                <!-- Header text bound to the view model (Add/Edit Appointment) -->
+                <TextBlock Grid.Row="0"
+                           Text="{Binding HeaderText}"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,4"/>
+
+                <!-- ScrollViewer for form content -->
+                <ScrollViewer Grid.Row="2"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <!-- Main form grid for appointment fields -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180" MinWidth="150"/>
+                            <!-- Labels -->
+                            <ColumnDefinition Width="*" MinWidth="350"/>
+                            <!-- Inputs -->
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <!-- Customer -->
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                            <!-- Title -->
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                            <!-- Description -->
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                            <!-- Location -->
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                            <!-- Contact -->
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                            <!-- Type -->
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                            <!-- URL -->
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                            <!-- Start time -->
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                            <!-- End time -->
+                        </Grid.RowDefinitions>
+
+                        <!-- Customer selection -->
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Content="Customer"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1"
+                                  ItemsSource="{Binding Customers}"
+                                  DisplayMemberPath="CustomerName"
+                                  SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"
+                                  Margin="0,0,0,4"/>
+
+                        <!-- Title input -->
+                        <Label Grid.Row="2" Grid.Column="0"
+                               Content="Title"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"/>
+                        <TextBox Grid.Row="2" Grid.Column="1"
+                                 Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,4"/>
+
+                        <!-- Description input (multiline) -->
+                        <Label Grid.Row="4" Grid.Column="0"
+                               Content="Description"
+                               VerticalAlignment="Top"
+                               Margin="0,0,8,0"/>
+                        <TextBox Grid.Row="4" Grid.Column="1"
+                                 Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,4"
+                                 AcceptsReturn="True"
+                                 Height="60"
+                                 TextWrapping="Wrap"/>
+
+                        <!-- Location input -->
+                        <Label Grid.Row="6" Grid.Column="0"
+                               Content="Location"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"/>
+                        <TextBox Grid.Row="6" Grid.Column="1"
+                                 Text="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,4"/>
+
+                        <!-- Contact input -->
+                        <Label Grid.Row="8" Grid.Column="0"
+                               Content="Contact"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"/>
+                        <TextBox Grid.Row="8" Grid.Column="1"
+                                 Text="{Binding Contact, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,4"/>
+
+                        <!-- Type input -->
+                        <Label Grid.Row="10" Grid.Column="0"
+                               Content="Type"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"/>
+                        <TextBox Grid.Row="10" Grid.Column="1"
+                                 Text="{Binding Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,4"/>
+
+                        <!-- URL input -->
+                        <Label Grid.Row="12" Grid.Column="0"
+                               Content="URL"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"/>
+                        <TextBox Grid.Row="12" Grid.Column="1"
+                                 Text="{Binding Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,4"/>
+
+                        <!-- Start time picker (date + 12-hour time) -->
+                        <Label Grid.Row="14" Grid.Column="0"
+                               Content="Start Time (local)"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"/>
+                        <StackPanel Grid.Row="14" Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    Margin="0,0,0,4">
+                            <!-- Start date -->
+                            <StackPanel Margin="0,0,4,0">
+                                <TextBlock Text="Date" Margin="0,0,4,0"/>
+                                <DatePicker SelectedDate="{Binding StartDate, Mode=TwoWay}"
+                                            Margin="0,0,4,0"
+                                            MinWidth="110"/>
+                            </StackPanel>
+                            <!-- Start hour (1–12) -->
+                            <StackPanel Margin="0,0,4,0">
+                                <TextBlock Text="Hour" Margin="0,0,4,0"/>
+                                <ComboBox ItemsSource="{Binding HourOptions12}"
+                                          SelectedItem="{Binding StartHour12, Mode=TwoWay}"
+                                          Width="60"
+                                          Margin="0,0,4,0"/>
+                            </StackPanel>
+                            <!-- Start minute -->
+                            <StackPanel Margin="0,0,4,0">
+                                <TextBlock Text="Minute" Margin="0,0,4,0"/>
+                                <ComboBox ItemsSource="{Binding MinuteOptions}"
+                                          SelectedItem="{Binding StartMinute, Mode=TwoWay}"
+                                          Width="60"
+                                          Margin="0,0,4,0"/>
+                            </StackPanel>
+                            <!-- Start AM/PM -->
+                            <StackPanel>
+                                <TextBlock Text="AM / PM" Margin="0,0,4,0"/>
+                                <ComboBox ItemsSource="{Binding AmPmOptions}"
+                                          SelectedItem="{Binding StartAmPm, Mode=TwoWay}"
+                                          Width="60"
+                                          Margin="0,0,4,0"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- End time picker (date + 12-hour time) -->
+                        <Label Grid.Row="16" Grid.Column="0"
+                               Content="End Time (local)"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"/>
+                        <StackPanel Grid.Row="16" Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    Margin="0,0,0,4">
+                            <!-- End date -->
+                            <StackPanel Margin="0,0,4,0">
+                                <TextBlock Text="Date" Margin="0,0,4,0"/>
+                                <DatePicker SelectedDate="{Binding EndDate, Mode=TwoWay}"
+                                            Margin="0,0,4,0"
+                                            MinWidth="110"/>
+                            </StackPanel>
+                            <!-- End hour (1–12) -->
+                            <StackPanel Margin="0,0,4,0">
+                                <TextBlock Text="Hour" Margin="0,0,4,0"/>
+                                <ComboBox ItemsSource="{Binding HourOptions12}"
+                                          SelectedItem="{Binding EndHour12, Mode=TwoWay}"
+                                          Width="60"
+                                          Margin="0,0,4,0"/>
+                            </StackPanel>
+                            <!-- End minute -->
+                            <StackPanel Margin="0,0,4,0">
+                                <TextBlock Text="Minute" Margin="0,0,4,0"/>
+                                <ComboBox ItemsSource="{Binding MinuteOptions}"
+                                          SelectedItem="{Binding EndMinute, Mode=TwoWay}"
+                                          Width="60"
+                                          Margin="0,0,4,0"/>
+                            </StackPanel>
+                            <!-- End AM/PM -->
+                            <StackPanel>
+                                <TextBlock Text="AM / PM" Margin="0,0,4,0"/>
+                                <ComboBox ItemsSource="{Binding AmPmOptions}"
+                                          SelectedItem="{Binding EndAmPm, Mode=TwoWay}"
+                                          Width="60"
+                                          Margin="0,0,4,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+
+                <!-- Bottom button bar for Save and Cancel -->
+                <StackPanel Grid.Row="3"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,16,0,0">
+                    <!-- Primary Save button bound to SaveCommand -->
+                    <Button Content="{Binding PrimaryButtonText}"
+                            Style="{StaticResource PrimaryFlatButton}"
+                            Command="{Binding SaveCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                            Margin="0,0,8,0"/>
+                    <!-- Cancel button bound to CancelCommand -->
+                    <Button Content="Cancel"
+                            Style="{StaticResource SecondaryButtonStyle}"
+                            Command="{Binding CancelCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

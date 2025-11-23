@@ -12,21 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using AppointmentScheduler.Models;
-using AppointmentScheduler.ViewModels;
 
-namespace AppointmentScheduler
+namespace AppointmentScheduler.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CalendarView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CalendarView : UserControl
     {
-        public MainWindow()
+        public CalendarView()
         {
             InitializeComponent();
-
-            DataContext = new MainWindowViewModel();
         }
     }
 }

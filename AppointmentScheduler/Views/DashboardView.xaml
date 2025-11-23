@@ -1,7 +1,320 @@
-﻿<UserControl x:Class="AppointmentScheduler.Views.DashboardView"
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="AppointmentScheduler.Views.DashboardView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Grid>
-        <TextBlock Text="{Binding WelcomeMessage}" FontSize="22" FontWeight="Bold"/>
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="600">
+
+    <!-- Outer grid for header and body -->
+    <Grid Background="{StaticResource PrimaryColorBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Header row -->
+            <RowDefinition Height="*"/>
+            <!-- Body row -->
+        </Grid.RowDefinitions>
+
+        <!-- HEADER AREA -->
+        <Border Grid.Row="0"
+                Margin="16,16,16,8"
+                Background="Transparent">
+            <DockPanel>
+
+                <!-- Left side: welcome text and date/time zone info -->
+                <StackPanel DockPanel.Dock="Left">
+                    <TextBlock Text="{Binding WelcomeText}"
+                               FontSize="22"
+                               FontWeight="SemiBold"
+                               Foreground="White"
+                               TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding TodayText}"
+                               FontSize="13"
+                               Foreground="White"
+                               Opacity="0.9"
+                               Margin="0,2,0,0"
+                               TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding TimeZoneText}"
+                               FontSize="12"
+                               Foreground="White"
+                               Opacity="0.85"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <!-- Right side: Refresh button -->
+                <Button Content="Refresh"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Command="{Binding RefreshCommand}"
+                        HorizontalAlignment="Right"
+                        Margin="8,0,0,0"
+                        DockPanel.Dock="Right"/>
+            </DockPanel>
+        </Border>
+
+        <!-- BODY AREA: ScrollViewer for responsive content -->
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <Grid Margin="16,0,16,16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Upcoming appointment -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Today at a Glance -->
+                    <RowDefinition Height="Auto" MinHeight="300"/>
+                    <!-- Reports -->
+                </Grid.RowDefinitions>
+
+                <!-- UPCOMING APPOINTMENT CARD -->
+                <Border Grid.Row="0"
+                        Style="{StaticResource CardBorderStyle}"
+                        Margin="0,0,0,12"
+                        Padding="16">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <!-- Text area -->
+                            <ColumnDefinition Width="Auto"/>
+                            <!-- Countdown -->
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Left side: upcoming appointment text -->
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Upcoming Appointment"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding UpcomingAppointmentSummary}"
+                                       FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Foreground="{StaticResource PrimaryColorBrush}"
+                                       TextWrapping="Wrap"/>
+
+                            <TextBlock Text="{Binding UpcomingAppointmentDetails}"
+                                       FontSize="12"
+                                       Margin="0,4,0,0"
+                                       TextWrapping="Wrap"/>
+
+                            <TextBlock Text="{Binding UpcomingAppointmentSecondary}"
+                                       FontSize="11"
+                                       Margin="0,4,0,0"
+                                       Foreground="{StaticResource SubtleTextBrush}"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <!-- Right side: countdown in minutes -->
+                        <StackPanel Grid.Column="1"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="8,0,0,0">
+                            <TextBlock Text="{Binding UpcomingCountdownText}"
+                                       FontSize="26"
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Right"/>
+                            <TextBlock Text="minutes"
+                                       FontSize="11"
+                                       HorizontalAlignment="Right"
+                                       Foreground="{StaticResource SubtleTextBrush}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- TODAY AT A GLANCE CARD -->
+                <Border Grid.Row="1"
+                        Style="{StaticResource CardBorderStyle}"
+                        Margin="0,0,0,12"
+                        Padding="16">
+                    <StackPanel>
+
+                        <!-- Card header -->
+                        <TextBlock Text="Today at a Glance"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,8"/>
+
+                        <!-- Three-column grid with key metrics -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" MinWidth="100"/>
+                                <!-- Today count -->
+                                <ColumnDefinition Width="*" MinWidth="100"/>
+                                <!-- Week count -->
+                                <ColumnDefinition Width="*" MinWidth="100"/>
+                                <!-- Customers -->
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Appointments today -->
+                            <StackPanel Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        Margin="4">
+                                <TextBlock Text="Today"
+                                           FontSize="12"
+                                           Foreground="{StaticResource SubtleTextBrush}"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding TodayAppointmentsCount}"
+                                           FontSize="22"
+                                           FontWeight="SemiBold"
+                                           Margin="0,2,0,0"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="appointments"
+                                           FontSize="11"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+
+                            <!-- Appointments next 7 days -->
+                            <StackPanel Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        Margin="4">
+                                <TextBlock Text="Next 7 Days"
+                                           FontSize="12"
+                                           Foreground="{StaticResource SubtleTextBrush}"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding WeekAppointmentsCount}"
+                                           FontSize="22"
+                                           FontWeight="SemiBold"
+                                           Margin="0,2,0,0"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="appointments"
+                                           FontSize="11"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+
+                            <!-- Active customers count -->
+                            <StackPanel Grid.Column="2"
+                                        HorizontalAlignment="Center"
+                                        Margin="4">
+                                <TextBlock Text="Active Customers"
+                                           FontSize="12"
+                                           Foreground="{StaticResource SubtleTextBrush}"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding TotalCustomersCount}"
+                                           FontSize="22"
+                                           FontWeight="SemiBold"
+                                           Margin="0,2,0,0"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="in system"
+                                           FontSize="11"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- REPORTS CARD -->
+                <Border Grid.Row="2"
+                        Style="{StaticResource CardBorderStyle}"
+                        Padding="16"
+                        MinHeight="300">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220" MinWidth="180"/>
+                            <!-- Report buttons -->
+                            <ColumnDefinition Width="16"/>
+                            <!-- Spacer -->
+                            <ColumnDefinition Width="*" MinWidth="200"/>
+                            <!-- Report DataGrid -->
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Left column: report selection buttons and hint -->
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Reports"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,4"/>
+                            <TextBlock Text="Select a report to view it in the grid."
+                                       FontSize="12"
+                                       Foreground="{StaticResource SubtleTextBrush}"
+                                       Margin="0,0,0,12"
+                                       TextWrapping="Wrap"/>
+
+                            <!-- Report type buttons -->
+                            <Button Content="Appointment Types by Month"
+                                    Style="{StaticResource PrimaryFlatButton}"
+                                    Command="{Binding TypesByMonthReportCommand}"
+                                    Margin="0,0,0,8"/>
+
+                            <Button Content="Consultant Schedule"
+                                    Style="{StaticResource PrimaryFlatButton}"
+                                    Command="{Binding ConsultantScheduleReportCommand}"
+                                    Margin="0,0,0,8"/>
+
+                            <Button Content="Appointments by Customer"
+                                    Style="{StaticResource PrimaryFlatButton}"
+                                    Command="{Binding CustomerAppointmentsReportCommand}"
+                                    Margin="0,0,0,8"/>
+
+                            <!-- Report hint text -->
+                            <TextBlock Text="{Binding CurrentReportHint}"
+                                       FontSize="11"
+                                       Foreground="{StaticResource SubtleTextBrush}"
+                                       Margin="0,8,0,0"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <!-- Right column: current report title, subtitle, and data grid -->
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <!-- Report title -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Report subtitle -->
+                                <RowDefinition Height="*"/>
+                                <!-- Report grid -->
+                            </Grid.RowDefinitions>
+
+                            <!-- Report title -->
+                            <TextBlock Grid.Row="0"
+                                       Text="{Binding CurrentReportTitle}"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,2"
+                                       TextWrapping="Wrap"/>
+
+                            <!-- Report subtitle -->
+                            <TextBlock Grid.Row="1"
+                                       Text="{Binding CurrentReportSubtitle}"
+                                       FontSize="11"
+                                       Foreground="{StaticResource SubtleTextBrush}"
+                                       Margin="0,0,0,6"
+                                       TextWrapping="Wrap"/>
+
+                            <!-- Dynamic DataGrid that binds to the current report items -->
+                            <DataGrid Grid.Row="2"
+                                      ItemsSource="{Binding CurrentReportItems}"
+                                      AutoGenerateColumns="True"
+                                      CanUserAddRows="False"
+                                      CanUserDeleteRows="False"
+                                      IsReadOnly="True"
+                                      HeadersVisibility="Column"
+                                      GridLinesVisibility="None"
+                                      BorderThickness="0"
+                                      RowHeight="26"
+                                      ColumnHeaderHeight="28"
+                                      ColumnWidth="*"
+                                      MinColumnWidth="130"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch">
+
+                                <!-- Cell padding for readability -->
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Padding" Value="6,0,6,0"/>
+                                    </Style>
+                                </DataGrid.CellStyle>
+
+                                <!-- Column header padding -->
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Padding" Value="6,2,6,2"/>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                            </DataGrid>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

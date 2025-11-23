@@ -1,9 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using AppointmentScheduler.Models;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
 namespace AppointmentScheduler.ViewModels
 {
+    /// <summary>
+    /// Represents one navigation item in the application's main sidebar.
+    /// </summary>
     public class NavigationItem
     {
         public string Title { get; set; }
@@ -11,10 +15,15 @@ namespace AppointmentScheduler.ViewModels
         public object ViewModel { get; set; }
     }
 
+    /// <summary>
+    /// ViewModel for the main window, managing navigation and current user context.
+    /// </summary>
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        public User CurrentUser { get; }
         public ObservableCollection<NavigationItem> NavigationItems { get; }
 
+        // Selected navigation item and corresponding ViewModel
         private NavigationItem _selectedNavigationItem;
         public NavigationItem SelectedNavigationItem
         {
@@ -30,6 +39,7 @@ namespace AppointmentScheduler.ViewModels
             }
         }
 
+        // Current ViewModel displayed in the main content area
         private object _currentViewModel;
         public object CurrentViewModel
         {
@@ -44,8 +54,9 @@ namespace AppointmentScheduler.ViewModels
             }
         }
 
+        // Initialize the navigation system and defaults to dashboard
         public MainWindowViewModel()
-        {
+        {           
             NavigationItems = new ObservableCollection<NavigationItem>
             {
                 new NavigationItem

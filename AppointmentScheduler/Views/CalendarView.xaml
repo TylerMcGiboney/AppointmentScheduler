@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="AppointmentScheduler.Views.CalendarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AppointmentScheduler.Views"
+             xmlns:vm="clr-namespace:AppointmentScheduler.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <!-- ScrollViewer for smaller screens -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Auto">
+        <!-- Main layout grid: left calendar column, right appointment list -->
+        <Grid MinWidth="600">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" MinWidth="250" MaxWidth="350"/>
+                <!-- Calendar column -->
+                <ColumnDefinition Width="16"/>
+                <!-- Spacer -->
+                <ColumnDefinition Width="*" MinWidth="300"/>
+                <!-- Appointment list -->
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT CARD: Calendar and selected date display -->
+            <Border Grid.Column="0"
+                    Style="{StaticResource CardBorderStyle}">
+                <StackPanel>
+
+                    <!-- Calendar title -->
+                    <TextBlock Text="Calendar"
+                               Style="{StaticResource SectionHeaderTextStyle}"/>
+
+                    <!-- Shows the currently selected date -->
+                    <TextBlock Text="{Binding SelectedDate}"
+                               Style="{StaticResource SubtleTextStyle}"
+                               Margin="0,4,0,12"
+                               TextWrapping="Wrap"/>
+
+                    <!-- Calendar control bound to SelectedDate -->
+                    <Calendar SelectedDate="{Binding SelectedDate}"
+                              DisplayDate="{Binding SelectedDate}"
+                              BorderThickness="0"
+                              Style="{StaticResource PrimaryCalendarStyle}"
+                              HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <!-- RIGHT CARD: List of appointments for the selected date -->
+            <Border Grid.Column="2"
+                    Style="{StaticResource CardBorderStyle}">
+                <DockPanel>
+
+                    <!-- Section header above the DataGrid -->
+                    <StackPanel DockPanel.Dock="Top"
+                                Orientation="Horizontal"
+                                Margin="0,0,0,8"
+                                FlowDirection="LeftToRight">
+
+                        <TextBlock Text="Appointments"
+                                   Style="{StaticResource SectionHeaderTextStyle}"/>
+
+                        <!-- Shows the selected date formatted -->
+                        <TextBlock Text="{Binding SelectedDate,
+                                                  StringFormat=' for {0:MMMM d, yyyy}'}"
+                                   Style="{StaticResource SubtleTextStyle}"
+                                   Margin="4,3,0,0"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <!-- ScrollViewer for DataGrid -->
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Auto">
+                        <!-- DataGrid showing appointments for the selected date -->
+                        <DataGrid ItemsSource="{Binding AppointmentsForSelectedDate}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  CanUserDeleteRows="False"
+                                  IsReadOnly="True"
+                                  HeadersVisibility="Column"
+                                  BorderThickness="0"
+                                  Style="{StaticResource PrimaryDataGridStyle}"
+                                  MinRowHeight="28">
+
+                            <!-- Override DataGrid header style with shared template -->
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridColumnHeader"
+                                       BasedOn="{StaticResource PrimaryDataGridColumnHeaderStyle}"/>
+                            </DataGrid.Resources>
+
+                            <!-- Columns displayed in the appointment list -->
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Customer"
+                                                    Binding="{Binding CustomerName}"
+                                                    Width="2*"
+                                                    MinWidth="100"/>
+                                <DataGridTextColumn Header="Title"
+                                                    Binding="{Binding Title}"
+                                                    Width="2*"
+                                                    MinWidth="100"/>
+                                <DataGridTextColumn Header="Location"
+                                                    Binding="{Binding Location}"
+                                                    Width="*"
+                                                    MinWidth="80"/>
+                                <DataGridTextColumn Header="Contact"
+                                                    Binding="{Binding Contact}"
+                                                    Width="*"
+                                                    MinWidth="80"/>
+
+                                <!-- Start/End times are already converted to local in the ViewModel -->
+                                <DataGridTextColumn Header="Start"
+                                                    Binding="{Binding StartLocal, StringFormat='{}{0:t}'}"
+                                                    Width="*"
+                                                    MinWidth="70"/>
+                                <DataGridTextColumn Header="End"
+                                                    Binding="{Binding EndLocal, StringFormat='{}{0:t}'}"
+                                                    Width="*"
+                                                    MinWidth="70"/>
+
+                                <!-- Metadata timestamps -->
+                                <DataGridTextColumn Header="Created"
+                                                    Binding="{Binding CreateDate, StringFormat='{}{0:g}'}"
+                                                    Width="*"
+                                                    MinWidth="110"/>
+                                <DataGridTextColumn Header="Updated"
+                                                    Binding="{Binding LastUpdate, StringFormat='{}{0:g}'}"
+                                                    Width="*"
+                                                    MinWidth="110"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
+        </Grid>
+    </ScrollViewer>
+</UserControl>

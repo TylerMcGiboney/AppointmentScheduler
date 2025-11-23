@@ -1,8 +1,176 @@
-﻿<UserControl x:Class="AppointmentScheduler.Views.AppointmentsView"
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="AppointmentScheduler.Views.AppointmentsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid>
-        <ListBox ItemsSource="{Binding Appointments}"/>
+    <!--
+        Layout:
+        - Top: Main DataGrid card showing all appointments
+        - Bottom: Buttons for Add / Edit / Delete
+        - Margin around entire content for spacing inside main window
+    -->
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <!-- Main DataGrid area -->
+            <RowDefinition Height="16"/>
+            <!-- Spacing -->
+            <RowDefinition Height="Auto"/>
+            <!-- Bottom button bar -->
+        </Grid.RowDefinitions>
+
+        <!--  CARD: Appointments DataGrid  -->
+        <Border Grid.Row="0"
+                Style="{StaticResource CardBorderStyle}">
+            <DockPanel>
+
+                <!-- Card Header -->
+                <StackPanel DockPanel.Dock="Top"
+                            Orientation="Horizontal"
+                            Margin="0,0,0,12">
+                    <TextBlock Text="Appointments"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource PrimaryColorBrush}"/>
+
+                    <TextBlock Text=" · shown in local time"
+                               Margin="8,2,0,0"
+                               FontSize="12"
+                               Foreground="{StaticResource SubtleTextBrush}" />
+                </StackPanel>
+
+                <!-- ScrollViewer for DataGrid -->
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto">
+                    <!--
+                        DataGrid displaying all appointments.
+                        Bound to UserAppointments from AppointmentsViewModel.
+                        Implicit DataGrid styles are applied (defined in DataGrid.xaml).
+                    -->
+                    <DataGrid Name="AppointmentDataGrid"
+                              ItemsSource="{Binding UserAppointments}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              IsReadOnly="True"
+                              HeadersVisibility="Column"
+                              GridLinesVisibility="None"
+                              BorderThickness="0"
+                              RowHeight="32"
+                              ColumnHeaderHeight="32"
+                              SelectionMode="Single"
+                              SelectionUnit="FullRow"
+                              ScrollViewer.CanContentScroll="True"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              MinRowHeight="30">
+
+                        <DataGrid.Columns>
+
+                            <!-- Identifiers -->
+                            <DataGridTextColumn Header="Appointment #"
+                                                Binding="{Binding AppointmentId}"
+                                                Width="Auto"
+                                                MinWidth="90"/>
+                            <DataGridTextColumn Header="Customer ID"
+                                                Binding="{Binding CustomerId}"
+                                                Width="Auto"
+                                                MinWidth="90"/>
+                            <DataGridTextColumn Header="Customer"
+                                                Binding="{Binding CustomerName}"
+                                                Width="2*"
+                                                MinWidth="120"/>
+                            <DataGridTextColumn Header="User ID"
+                                                Binding="{Binding UserId}"
+                                                Width="Auto"
+                                                MinWidth="70"/>
+
+                            <!-- General appointment fields -->
+                            <DataGridTextColumn Header="Title"
+                                                Binding="{Binding Title}"
+                                                Width="2*"
+                                                MinWidth="100"/>
+                            <DataGridTextColumn Header="Description"
+                                                Binding="{Binding Description}"
+                                                Width="3*"
+                                                MinWidth="150"/>
+                            <DataGridTextColumn Header="Location"
+                                                Binding="{Binding Location}"
+                                                Width="*"
+                                                MinWidth="80"/>
+                            <DataGridTextColumn Header="Contact"
+                                                Binding="{Binding Contact}"
+                                                Width="*"
+                                                MinWidth="80"/>
+                            <DataGridTextColumn Header="Type"
+                                                Binding="{Binding Type}"
+                                                Width="*"
+                                                MinWidth="70"/>
+                            <DataGridTextColumn Header="URL"
+                                                Binding="{Binding Url}"
+                                                Width="2*"
+                                                MinWidth="100"/>
+
+                            <!-- Dates (already converted to local time in ViewModel) -->
+                            <DataGridTextColumn Header="Start"
+                                                Binding="{Binding Start, StringFormat='{}{0:g}'}"
+                                                Width="*"
+                                                MinWidth="120"/>
+                            <DataGridTextColumn Header="End"
+                                                Binding="{Binding End, StringFormat='{}{0:g}'}"
+                                                Width="*"
+                                                MinWidth="120"/>
+                            <DataGridTextColumn Header="Created"
+                                                Binding="{Binding CreateDate, StringFormat='{}{0:g}'}"
+                                                Width="*"
+                                                MinWidth="120"/>
+                            <DataGridTextColumn Header="Created By"
+                                                Binding="{Binding CreatedBy}"
+                                                Width="*"
+                                                MinWidth="90"/>
+                            <DataGridTextColumn Header="Last Update"
+                                                Binding="{Binding LastUpdate, StringFormat='{}{0:g}'}"
+                                                Width="*"
+                                                MinWidth="120"/>
+                            <DataGridTextColumn Header="Last Updated By"
+                                                Binding="{Binding LastUpdateBy}"
+                                                Width="*"
+                                                MinWidth="100"/>
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+
+        <!--  BOTTOM BUTTON BAR -->
+        <Border Grid.Row="2"
+                Margin="0,0,0,4"
+                Background="Transparent">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+
+                <!-- Add Appointment Button -->
+                <Button Content="Add Appointment"
+                        Style="{StaticResource PrimaryFlatButton}"
+                        Click="AddAppointment_Click"/>
+
+                <!-- Edit Appointment Button -->
+                <Button Content="Edit"
+                        Style="{StaticResource PrimaryFlatButton}"
+                        Margin="8,0,0,0"
+                        Click="EditAppointment_Click"/>
+
+                <!-- Delete Appointment Button -->
+                <Button Content="Delete"
+                        Style="{StaticResource PrimaryFlatButton}"
+                        Margin="8,0,0,0"
+                        Background="#EF4444"
+                        Click="DeleteAppointment_Click"/>
+
+            </StackPanel>
+        </Border>
+
     </Grid>
 </UserControl>

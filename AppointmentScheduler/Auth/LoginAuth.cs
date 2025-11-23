@@ -11,8 +11,18 @@ namespace AppointmentScheduler.Auth
 {
     public class LoginAuth
     {
+
+        /// <summary>
+        /// Authenticate user by username and password
+        /// </summary>
+        /// <param name="username">Username provided by login form</param>
+        /// <param name="password">Raw password entered in login form</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException"></exception>
         public User Authenticate(string username, string password)
         {
+            //Query checks for matching username and password in the database
+            //The password is stored in plain text per project requirements
             try
             {
                 string query = @"SELECT userId, userName, active, createDate, createdBy, lastUpdate, lastUpdateBy
@@ -33,6 +43,8 @@ namespace AppointmentScheduler.Auth
                         {
                             if (reader.Read())
                             {
+                                //Map DB columns to User object
+                                //Password is not included for security reasons
                                 User authenticatedUser = new User();
                                 authenticatedUser.UserId = reader.GetInt32("userId");
                                 authenticatedUser.UserName = reader.GetString("userName");
@@ -55,6 +67,7 @@ namespace AppointmentScheduler.Auth
             }
             catch (MySqlException ex)
             {
+                // Handle database-related exceptions
                 throw new ApplicationException(Services.ExceptionHandler.GetMessage(ex, "Authenticate user"), ex);
             }
         }

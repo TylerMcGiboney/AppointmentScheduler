@@ -106,6 +106,7 @@
     </ApplicationDefinition>
     <Compile Include="Auth\LoginAuth.cs" />
     <Compile Include="Auth\LoginHistory.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\AppointmentRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
@@ -124,6 +125,27 @@
     <Compile Include="Services\LocalizationService.cs" />
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="Validators\AppointmentValidator.cs" />
+    <Compile Include="ViewModels\AppointmentEditorViewModel.cs" />
+    <Compile Include="ViewModels\CustomerEditorViewModel.cs" />
+    <Compile Include="ViewModels\ReportsViewModel.cs" />
+    <Compile Include="Views\AppointmentEditWindow.xaml.cs">
+      <DependentUpon>AppointmentEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AppointmentTypesReportWindow.xaml.cs">
+      <DependentUpon>AppointmentTypesReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerAppointmentReportWindow.xaml.cs">
+      <DependentUpon>CustomerAppointmentReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerEditWindow.xaml.cs">
+      <DependentUpon>CustomerEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportsView.xaml.cs">
+      <DependentUpon>ReportsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserScheduleReportWindow.xaml.cs">
+      <DependentUpon>UserScheduleReportWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resources\Themes\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,7 +162,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AppointmentEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AppointmentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AppointmentTypesReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CalendarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomerAppointmentReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomerEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,6 +206,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\AppointmentItemViewModel.cs" />
     <Compile Include="ViewModels\AppointmentsViewModel.cs" />
     <Compile Include="ViewModels\CalendarViewModel.cs" />
     <Compile Include="ViewModels\CustomersViewModel.cs" />
@@ -171,6 +214,9 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\AppointmentsView.xaml.cs">
       <DependentUpon>AppointmentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CalendarView.xaml.cs">
+      <DependentUpon>CalendarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomerViews.xaml.cs">
       <DependentUpon>CustomerViews.xaml</DependentUpon>
@@ -185,6 +231,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ReportsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserScheduleReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Address.cs" />

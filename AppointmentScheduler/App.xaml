@@ -6,6 +6,7 @@
              xmlns:views="clr-namespace:AppointmentScheduler.Views"
              >
     <Application.Resources>
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Themes/Colors.xaml"/>
@@ -13,6 +14,29 @@
                 <ResourceDictionary Source="Resources/Themes/DataGrid.xaml"/>
                 <ResourceDictionary Source="/Resources/Themes/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+        
+        
+        
+
+        <DataTemplate DataType="{x:Type vm:CalendarViewModel}">
+            <views:CalendarView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CustomersViewModel}">
+            <views:CustomerViews/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AppointmentsViewModel}">
+            <views:AppointmentsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ReportsViewModel}">
+            <views:ReportsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+            <views:DashboardView/>
+        </DataTemplate>
+
+
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
